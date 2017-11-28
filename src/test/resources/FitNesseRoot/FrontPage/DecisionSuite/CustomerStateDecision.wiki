@@ -1,0 +1,14 @@
+---
+Test
+---
+!define TEST_SYSTEM {slim}
+
+|import                      |
+|de.holisticon.dmn.testdriver|
+
+|customer state decision|insurance_protection.dmn|customer_state_decision|
+|is vip                   |insurance duration      |customer state?        |
+|yes                      |2                       |high                   |
+|no                       |11                      |high                   |
+|no                       |6                       |middle                 |
+|no                       |4                       |low                    |

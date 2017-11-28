@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="insurance_protection_definition" name="Versicherungsschutz ermitteln" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="customer_state_decision" name="Kundenstatus ermitteln">
+    <extensionElements>
+      <biodi:bounds x="-44" y="124" width="180" height="80" />
+      <biodi:edge source="InputData_1fb5s1r">
+        <biodi:waypoints x="-25" y="251" />
+        <biodi:waypoints x="44" y="204" />
+      </biodi:edge>
+      <biodi:edge source="InputData_13qqnh5">
+        <biodi:waypoints x="104" y="252" />
+        <biodi:waypoints x="76" y="204" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#InputData_1fb5s1r" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_13qqnh5" />
+    </informationRequirement>
+    <decisionTable hitPolicy="FIRST">
+      <input id="InputClause_0j8imrk" label="VIP" camunda:inputVariable="">
+        <inputExpression id="LiteralExpression_18ziu1g" typeRef="boolean">        <text>isVip</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0xvshh6" label="Versicherungsdauer" camunda:inputVariable="">
+        <inputExpression id="LiteralExpression_0voo0v5" typeRef="long">        <text>insuranceDuration</text>
+</inputExpression>
+      </input>
+      <output id="output_1" label="Kundenstatus" name="customerState" typeRef="string">
+        <outputValues id="UnaryTests_1v9u6vn">        <text><![CDATA["high","middle","low"]]></text>
+</outputValues>
+      </output>
+      <rule id="row-441383130-1">
+        <inputEntry id="UnaryTests_0ppst2h">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0vqabp6">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1y8qbgi">        <text><![CDATA["high"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-441383130-2">
+        <inputEntry id="UnaryTests_16e6vzw">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0zr2ett">        <text><![CDATA[>= 10]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0c67bc9">        <text><![CDATA["high"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-441383130-3">
+        <inputEntry id="UnaryTests_0lndix8">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_15tsg8b">        <text>[5..9]</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_00iuyq6">        <text><![CDATA["middle"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-441383130-4">
+        <inputEntry id="UnaryTests_0md2wb9">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1b17ybt">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_11xta4a">        <text><![CDATA["low"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_1fb5s1r" name="VIP">
+    <extensionElements>
+      <biodi:bounds x="-89" y="251" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <inputData id="InputData_13qqnh5" name="Versicherungsdauer">
+    <extensionElements>
+      <biodi:bounds x="58" y="252" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <decision id="insurance_protection_decision" name="Versicherungsschutz ermitteln">
+    <extensionElements>
+      <biodi:bounds x="9" y="5" width="180" height="80" />
+      <biodi:edge source="customer_state_decision">
+        <biodi:waypoints x="67" y="124" />
+        <biodi:waypoints x="66" y="85" />
+      </biodi:edge>
+      <biodi:edge source="InputData_0ks00e5">
+        <biodi:waypoints x="221" y="84" />
+        <biodi:waypoints x="189" y="72" />
+      </biodi:edge>
+      <biodi:edge source="InputData_0tzngf7">
+        <biodi:waypoints x="223" y="44" />
+        <biodi:waypoints x="189" y="44" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredDecision href="#customer_state_decision" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_0ks00e5" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_0tzngf7" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0j1755a" hitPolicy="FIRST">
+      <input id="InputClause_1gf2ydd" label="Schadensart" camunda:inputVariable="">
+        <inputExpression id="LiteralExpression_1b93pnx" typeRef="string">        <text>damage</text>
+</inputExpression>
+        <inputValues id="UnaryTests_0hspj7w">        <text><![CDATA["person","material"]]></text>
+</inputValues>
+      </input>
+      <input id="InputClause_1jivcr2" label="Kundenstatus" camunda:inputVariable="customerState">
+        <inputExpression id="LiteralExpression_1ep55z0" typeRef="string">        <text></text>
+</inputExpression>
+        <inputValues id="UnaryTests_16qakto">        <text><![CDATA["high","middle","low"]]></text>
+</inputValues>
+      </input>
+      <input id="InputClause_0kd1hx5" label="Betrag" camunda:inputVariable="">
+        <inputExpression id="LiteralExpression_0w092f7" typeRef="long">        <text>amount</text>
+</inputExpression>
+      </input>
+      <output id="OutputClause_0jfnmp0" label="Versicherungsschutz" name="insuranceProtection" typeRef="boolean" />
+      <rule id="row-441383130-5">
+        <inputEntry id="UnaryTests_1p8uuqb">        <text><![CDATA["person"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1aywvrc">        <text><![CDATA["high"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1eo7s4z">        <text><![CDATA[<= 20000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0gw2hmj">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-441383130-6">
+        <inputEntry id="UnaryTests_1oqln3p">        <text><![CDATA["person"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0z46wkv">        <text><![CDATA["middle"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0lvz499">        <text><![CDATA[<= 10000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1jltyak">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-441383130-7">
+        <inputEntry id="UnaryTests_0mrc00j">        <text><![CDATA["person"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ge824f">        <text><![CDATA["low"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_02d9dza">        <text><![CDATA[<= 5000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0m75kb9">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-441383130-8">
+        <inputEntry id="UnaryTests_0ohkl0l">        <text><![CDATA["material"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1x90l9b">        <text><![CDATA["high"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_07zkmzf">        <text><![CDATA[<= 4000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0y8vvia">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-441383130-9">
+        <inputEntry id="UnaryTests_08vn8y1">        <text><![CDATA["material"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_03i1ype">        <text><![CDATA["middle"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_08kgph4">        <text><![CDATA[<= 1000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1azjok4">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-441383130-10">
+        <inputEntry id="UnaryTests_14jnsa1">        <text><![CDATA["material"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0f455kj">        <text><![CDATA["low"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_05osnvg">        <text><![CDATA[<= 500]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1ldbayo">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-441383130-11">
+        <inputEntry id="UnaryTests_0qzizde">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1huvx4w">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_129e7qn">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1gs5dd1">        <text>false</text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0ks00e5" name="Schadensart">
+    <extensionElements>
+      <biodi:bounds x="219.26865671641792" y="84.09529276693456" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <inputData id="InputData_0tzngf7" name="Betrag">
+    <extensionElements>
+      <biodi:bounds x="223.26865671641792" y="20.095292766934563" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+</definitions>
