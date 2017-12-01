@@ -9,6 +9,6 @@ Test
 |insurance protection decision|insurance_protection.dmn|insurance_protection_decision        |
 |is vip                       |insurance duration      |damage  |amount|insurance protection?|
 |yes                          |2                       |person  |19000 |true                 |
-|no                           |11                      |person  |11000 |false                |
+|no                           |11                      |person  |11000 |true                 |
 |no                           |6                       |material|450   |true                 |
 |no                           |4                       |material|1000  |false                |
