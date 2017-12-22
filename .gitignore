@@ -1,0 +1,10 @@
+src/test/resources/FitNesseRoot/FitNesse
+src/test/resources/FitNesseRoot/PageFooter
+src/test/resources/FitNesseRoot/PageHeader
+src/test/resources/FitNesseRoot/TemplateLibrary
+server/work/FitNesseRoot/FitNesse
+server/work/FitNesseRoot/PageFooter
+server/work/FitNesseRoot/PageHeader
+server/work/FitNesseRoot/TemplateLibrary
+server/work/FitNesseRoot/files
+*.jar
