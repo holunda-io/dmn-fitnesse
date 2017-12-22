@@ -26,17 +26,12 @@
         <dependency>
             <groupId>org.camunda.bpm.dmn</groupId>
             <artifactId>camunda-engine-dmn</artifactId>
-            <version>7.6.0</version>
+            <version>7.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.fitnesse</groupId>
             <artifactId>fitnesse</artifactId>
             <version>20161106</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.10</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

@@ -1,16 +1,20 @@
 package de.holisticon.dmn.testdriver;
 
-import lombok.Setter;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.Variables;
 
 public class CustomerStateDecision extends AbstractDecision<String> {
 
     private boolean isVip;
-
-    @Setter
     private int insuranceDuration;
 
+    public void setInsuranceDuration(int insuranceDuration) {
+        this.insuranceDuration = insuranceDuration;
+    }
+
+    public void setIsVip(boolean isVip) {
+        this.isVip = isVip;
+    }
 
     public CustomerStateDecision(String dmnFile, String decisionName) {
         super(dmnFile, decisionName);
@@ -18,19 +22,14 @@ public class CustomerStateDecision extends AbstractDecision<String> {
 
     public String customerState() {
 
-        return evaluateDecisionTable(createVariables(),"customerState");
+        return evaluateDecisionTable(createVariables(), "customerState");
     }
 
-    public VariableMap createVariables() {
-
-        VariableMap variableMap = Variables.createVariables();
-        variableMap
+    private VariableMap createVariables() {
+        return Variables
                 .putValue("isVip", isVip)
                 .putValue("insuranceDuration", insuranceDuration);
-        return variableMap;
     }
 
-    public void setIsVip(boolean isVip) {
-        this.isVip = isVip;
-    }
+
 }
